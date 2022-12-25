@@ -39,7 +39,7 @@ func (fs *FileSystem) GetThumb(ctx context.Context, id uint) (*response.ContentR
 	res, err := fs.Handler.Thumb(ctx, fs.FileTarget[0].SourceName)
 
 	// 本地存储策略出错时重新生成缩略图
-	if err != nil && fs.Policy.Type == "local" {
+	if err != nil {
 		fs.GenerateThumbnail(ctx, &fs.FileTarget[0])
 		res, err = fs.Handler.Thumb(ctx, fs.FileTarget[0].SourceName)
 	}
