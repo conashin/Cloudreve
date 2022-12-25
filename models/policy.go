@@ -3,12 +3,13 @@ package model
 import (
 	"encoding/gob"
 	"encoding/json"
-	"github.com/gofrs/uuid"
 	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gofrs/uuid"
 
 	"github.com/cloudreve/Cloudreve/v3/pkg/cache"
 	"github.com/cloudreve/Cloudreve/v3/pkg/util"
@@ -210,7 +211,7 @@ func (policy *Policy) IsTransitUpload(size uint64) bool {
 
 // IsThumbGenerateNeeded 返回此策略是否需要在上传后生成缩略图
 func (policy *Policy) IsThumbGenerateNeeded() bool {
-	return policy.Type == "local"
+	return policy.Type != "qiniu" && policy.Type != "oss" && policy.Type != "cos" && policy.Type != "upyun" && policy.Type != "onedrive"
 }
 
 // IsUploadPlaceholderWithSize 返回此策略创建上传会话时是否需要预留空间
