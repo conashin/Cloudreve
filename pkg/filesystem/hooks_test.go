@@ -481,7 +481,7 @@ func TestHookGenerateThumb(t *testing.T) {
 			Model: gorm.Model{ID: 1},
 		},
 		Handler: mockHandler,
-		Policy:  &model.Policy{Type: "local"},
+		Policy:  &model.Policy{Type: "s3"},
 	}
 
 	mockHandler.On("Delete", testMock.Anything, []string{"1.txt._thumb"}).Return([]string{}, nil)

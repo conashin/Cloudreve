@@ -264,8 +264,16 @@ func (handler *Driver) Delete(ctx context.Context, files []string) ([]string, er
 }
 
 // Thumb 获取文件缩略图
-func (handler *Driver) Thumb(ctx context.Context, path string) (*response.ContentResponse, error) {
-	return nil, errors.New("未实现")
+func (handler Driver) Thumb(ctx context.Context, path string) (*response.ContentResponse, error) {
+	file, err := handler.Get(ctx, path+model.GetSettingByNameWithDefault("thumb_file_suffix", "._thumb"))
+	if err != nil {
+		return nil, err
+	}
+
+	return &response.ContentResponse{
+		Redirect: false,
+		Content:  file,
+	}, nil
 }
 
 // Source 获取外链URL
